@@ -1,12 +1,13 @@
-# render.yaml
 services:
   - type: web
     name: laravel-app
-    runtime: php
-    buildCommand: |
-      composer install --no-dev
-      php artisan config:cache
-    startCommand: php artisan serve --host 0.0.0.0 --port 10000
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    buildFilter:
+      paths:
+        - Dockerfile
+        - ./**
     envVars:
       - key: APP_ENV
         value: production
